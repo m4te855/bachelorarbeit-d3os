@@ -173,6 +173,19 @@ pub(crate) mod key {
             pub(crate) use xous::destroy_tls;
             pub(super) use xous::{Key, get, set};
             use xous::{create, destroy};
+        } else if #[cfg(target_os = "d3os")] {
+            #[allow(unused_imports)]
+            mod racy;
+            #[cfg(test)]
+            mod tests;
+            mod d3os;
+            #[allow(unused_imports)]
+            pub(super) use racy::LazyKey;
+            //pub(crate) use d3os::destroy_tls;
+            #[allow(unused_imports)]
+            pub(super) use d3os::{Key, set, get};
+            #[allow(unused_imports)]
+            use d3os::{create, destroy};
         }
     }
 }

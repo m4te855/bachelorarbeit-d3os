@@ -51,6 +51,9 @@ cfg_if::cfg_if! {
     } else if #[cfg(target_os = "redox")] {
         mod redox;
         pub use redox::fill_bytes;
+    } else if #[cfg(target_os = "d3os")] {
+        mod d3os;
+        pub use d3os::fill_bytes;
     } else if #[cfg(all(target_vendor = "fortanix", target_env = "sgx"))] {
         mod sgx;
         pub use sgx::fill_bytes;

@@ -17,6 +17,7 @@ fn main() {
     if target_os == "linux"
         || target_os == "android"
         || target_os == "netbsd"
+        || target_os == "d3os"
         || target_os == "dragonfly"
         || target_os == "openbsd"
         || target_os == "freebsd"
