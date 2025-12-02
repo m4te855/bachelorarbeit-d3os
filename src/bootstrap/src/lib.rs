@@ -89,6 +89,7 @@ const EXTRA_CHECK_CFGS: &[(Option<Mode>, &str, Option<&[&'static str]>)] = &[
     (Some(Mode::ToolStd), "bootstrap", None),
     (Some(Mode::ToolRustcPrivate), "rust_analyzer", None),
     (Some(Mode::ToolStd), "rust_analyzer", None),
+    (Some(Mode::Std), "target_os", Some(&["d3os", "visionos"])),
     // Any library specific cfgs like `target_os`, `target_arch` should be put in
     // priority the `[lints.rust.unexpected_cfgs.check-cfg]` table
     // in the appropriate `library/{std,alloc,core}/Cargo.toml`

@@ -748,6 +748,9 @@
 //@ revisions: riscv64gc_unknown_nuttx_elf
 //@ [riscv64gc_unknown_nuttx_elf] compile-flags: --target riscv64gc-unknown-nuttx-elf
 //@ [riscv64gc_unknown_nuttx_elf] needs-llvm-components: riscv
+//@revisions: x86_64_unknown_d3os
+//@[x86_64_unknown_d3os] compile-flags: --target x86_64-unknown-d3os
+//@[x86_64_unknown_d3os] needs-llvm-components: x86
 // FIXME: disabled since it requires a custom LLVM until the upstream LLVM adds support for the target (https://github.com/espressif/llvm-project/issues/4)
 /*
     revisions: xtensa_esp32_none_elf

@@ -81,6 +81,10 @@ cfg_select! {
         mod zkvm;
         pub use self::zkvm::*;
     }
+    target_os = "d3os" => {
+        mod d3os;
+        pub use self::d3os::*;
+    }
     _ => {
         mod unsupported;
         pub use self::unsupported::*;
