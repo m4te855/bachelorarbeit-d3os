@@ -66,6 +66,10 @@ cfg_select! {
         mod motor;
         pub use motor::fill_bytes;
     }
+    target_os = "d3os" => {
+        mod d3os;
+        pub use d3os::fill_bytes;
+    }
     all(target_vendor = "fortanix", target_env = "sgx") => {
         mod sgx;
         pub use sgx::fill_bytes;

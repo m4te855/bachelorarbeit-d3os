@@ -52,8 +52,15 @@ cfg_select! {
     target_os = "zkvm" => {
         mod zkvm;
         pub use zkvm::*;
+<<<<<<< HEAD
     }
     _ => {
+=======
+    } else if #[cfg(target_os = "d3os")] {
+        mod d3os;
+        pub use d3os::*;
+    } else {
+>>>>>>> 24c22116fbe (Initial commit with first implementations)
         mod unsupported;
         pub use unsupported::*;
     }

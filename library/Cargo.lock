@@ -65,6 +65,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "concurrent"
+version = "0.1.0"
+dependencies = [
+ "compiler_builtins",
+ "rustc-std-workspace-alloc",
+ "rustc-std-workspace-core",
+ "syscall",
+]
+
+[[package]]
 name = "core"
 version = "0.0.0"
 
@@ -266,6 +276,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "runtime"
+version = "0.1.0"
+dependencies = [
+ "cfg-if",
+ "compiler_builtins",
+ "concurrent",
+ "rustc-std-workspace-alloc",
+ "rustc-std-workspace-core",
+ "syscall",
+]
+
+[[package]]
 name = "rustc-demangle"
 version = "0.1.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -334,6 +356,7 @@ dependencies = [
  "r-efi-alloc",
  "rand",
  "rand_xorshift",
+ "runtime",
  "rustc-demangle",
  "std_detect",
  "unwind",
@@ -348,6 +371,15 @@ name = "std_detect"
 version = "0.1.5"
 dependencies = [
  "libc",
+ "rustc-std-workspace-alloc",
+ "rustc-std-workspace-core",
+]
+
+[[package]]
+name = "syscall"
+version = "0.1.0"
+dependencies = [
+ "compiler_builtins",
  "rustc-std-workspace-alloc",
  "rustc-std-workspace-core",
 ]
