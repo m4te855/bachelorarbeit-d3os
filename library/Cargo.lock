@@ -350,6 +350,7 @@ dependencies = [
  "runtime",
  "rustc-demangle",
  "std_detect",
+ "syscall",
  "unwind",
  "wasi",
  "windows-targets 0.0.0",
