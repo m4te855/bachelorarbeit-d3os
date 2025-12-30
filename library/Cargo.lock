@@ -359,6 +359,7 @@ dependencies = [
  "runtime",
  "rustc-demangle",
  "std_detect",
+ "syscall",
  "unwind",
  "vex-sdk",
  "wasi 0.11.1+wasi-snapshot-preview1",
