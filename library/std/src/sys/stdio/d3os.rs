@@ -2,13 +2,13 @@
 use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut};
 use crate::arch::asm;
 
-//use syscall::*;
-//use terminal::*;
+use syscall::*; //syscall from D3OS
 
 pub struct Stdin;
 pub struct Stdout;
-//pub type Stderr = Stdout;
-pub struct Stderr;
+pub type Stderr = Stdout;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 impl Stdin {
     pub const fn new() -> Stdin {
@@ -70,98 +70,19 @@ impl Stdout {
 
 impl io::Write for Stdout {
     #[inline]
-    fn write(&mut self, buf: &[u8]) -> io::Result<usize> { //hier syscall/terminal
-        /*for byte in buf {
-            unsafe {
-                asm!("int 0x80", in("rax") 0, in ("rcx") *byte as u64);
-            };
-        }*/
-
-        ///////////////////////////////////////////
-        
-        /*let s: &str = "stdlib";
+    fn write(&mut self, _buf2: &[u8]) -> io::Result<usize> { //syscall used here
+        let s = "Grüße aus std::io!";
+        let buf: &[u8] = s.as_bytes();
 
         let res = syscall(
-            SystemCall::TerminalWrite,
-            &[s.as_bytes().as_ptr() as usize, s.len()],
+            SystemCall::TerminalWriteOutput,
+            &[buf.as_ptr() as usize, buf.len()],
         );
+            
         match res {
-            Ok(_) => Ok(buf.len()),
-            Err(_) =>Ok(buf.len()),
-        }*/
-        //let s = "std";
-        //let _ = terminal::write::print(format_args!("{}", s));
-
-        Ok(buf.len())
-    }
-
-    #[inline]
-    fn write_vectored(&mut self, bufs: &[IoSlice<'_>]) -> io::Result<usize> {
-        let total_len = bufs.iter().map(|b| b.len()).sum();
-        Ok(total_len)
-    }
-
-    #[inline]
-    fn is_write_vectored(&self) -> bool {
-        true
-    }
-
-    #[inline]
-    fn write_all(&mut self, _buf: &[u8]) -> io::Result<()> {
-        Ok(())
-    }
-
-    #[inline]
-    fn write_all_vectored(&mut self, _bufs: &mut [IoSlice<'_>]) -> io::Result<()> {
-        Ok(())
-    }
-
-    // Keep the default write_fmt so the `fmt::Arguments` are still evaluated.
-
-    #[inline]
-    fn flush(&mut self) -> io::Result<()> {
-        Ok(())
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-impl Stderr {
-    pub const fn new() -> Stderr {
-        Stderr
-    }
-}
-
-impl io::Write for Stderr {
-    #[inline]
-    fn write(&mut self, buf: &[u8]) -> io::Result<usize> { //hier syscall/terminal
-        /*for byte in buf {
-            unsafe {
-                asm!("int 0x80", in("rax") 0, in ("rcx") *byte as u64);
-            };
-        }*/
-
-        ///////////////////////////////////////////
-        
-        /*let s: &str = "stdlib";
-
-        let res = syscall(
-            SystemCall::TerminalWrite,
-            &[s.as_bytes().as_ptr() as usize, s.len()],
-        );
-        match res {
-            Ok(_) => Ok(buf.len()),
-            Err(_) =>Ok(buf.len()),
-        }*/
-
-        //let s = "std";
-        //let _ = terminal::write::print(format_args!("{}", s));
-
-        Ok(buf.len())
-
-        //Ok(buf.len())
+            Ok(_) => Ok(420),
+            Err(_) => Err(io::Error::new(io::ErrorKind::Other, "write failed")),
+        }
     }
 
     #[inline]
