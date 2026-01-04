@@ -3,6 +3,7 @@ use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut};
 use crate::arch::asm;
 
 use syscall::*; //syscall from D3OS
+use alloc::string::{String, ToString};
 
 pub struct Stdin;
 pub struct Stdout;
@@ -19,7 +20,20 @@ impl Stdin {
 impl io::Read for Stdin {
     #[inline]
     fn read(&mut self, _buf: &mut [u8]) -> io::Result<usize> {
-        Ok(0)
+        let mut buffer: [u8; 128] = [0; 128];
+
+        let read_bytes = syscall(
+            SystemCall::TerminalReadInput,
+            &[
+                buffer.as_mut_ptr() as usize,
+                buffer.len(),
+                0 as usize, //TerminalMode::Canonical as usize,
+            ],
+        )
+        .expect("Unable to read input");
+        Ok(read_bytes)
+
+        //String::from_utf8_lossy(&buffer[0..read_bytes]).to_string()
     }
 
     #[inline]
@@ -116,7 +130,7 @@ impl io::Write for Stdout {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-pub const STDIN_BUF_SIZE: usize = 0;
+pub const STDIN_BUF_SIZE: usize = 128;
 
 pub fn is_ebadf(_err: &io::Error) -> bool {
     true
