@@ -1,0 +1,14 @@
+# See bootstrap.example.toml for documentation of available options
+#
+profile = "compiler"  # Includes one of the default files in src/bootstrap/defaults
+change-id = 142379
+
+[llvm]
+    download-ci-llvm = false
+
+[build]
+    host = ["x86_64-unknown-linux-gnu"]
+    target = ["x86_64-unknown-linux-gnu", "x86_64-unknown-d3os"]
+
+[rust]
+    incremental = true
