@@ -11,10 +11,11 @@ unsafe extern "C" {
 #[unsafe(no_mangle)]
 #[allow(unused)]
 pub extern "C" fn _start() {
+    
     unsafe {
         main(0, ptr::null());
     };
-
+    
     let mut buffer = io::stdout();
     let x = buffer.write(&"12345".as_bytes());
 
@@ -27,6 +28,4 @@ pub extern "C" fn _start() {
     );
 
     syscall(SystemCall::ProcessExit, &[]).expect("Failed to exit process");
-    
-    //loop{};
 }
