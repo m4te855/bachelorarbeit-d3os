@@ -8,8 +8,5 @@ pub mod time;
 pub mod start;
 pub mod alloc;
 
-//neu
-//pub mod stdio;
-
 mod common;
 pub use common::*;
