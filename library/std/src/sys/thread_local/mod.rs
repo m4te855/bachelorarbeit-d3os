@@ -181,7 +181,8 @@ pub(crate) mod key {
             mod d3os;
             #[allow(unused_imports)]
             pub(super) use racy::LazyKey;
-            //pub(crate) use d3os::destroy_tls;
+            #[allow(unused_imports)]
+            pub(crate) use d3os::destroy_tls;
             #[allow(unused_imports)]
             pub(super) use d3os::{Key, set, get};
             #[allow(unused_imports)]
