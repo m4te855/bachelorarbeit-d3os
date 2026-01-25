@@ -1,11 +1,10 @@
+// Code based on https://wiki.osdev.org/Porting_Rust_standard_library
 use crate::ffi::{c_char, c_int};
 use crate::ptr;
 
-use syscall::{SystemCall, syscall};
 use concurrent::*;
-
-//use crate::io;
-//use crate::io::Write;
+// import of syscall for debug text (see line 24 below)
+use syscall::{SystemCall, syscall};
 
 unsafe extern "C" {
     fn main(argc: c_int, argv: *const *const c_char) -> c_int;
@@ -14,7 +13,7 @@ unsafe extern "C" {
 #[unsafe(no_mangle)]
 #[allow(unused)]
 pub extern "C" fn _start() {
-    //initialise thread environment for thread local storage (TLS)
+    // initialise thread environment for thread local storage (TLS)
     thread::init_thread_environment();
     
     // main method call

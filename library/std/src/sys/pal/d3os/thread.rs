@@ -1,3 +1,4 @@
+// Code copied from "unsupported".
 use super::unsupported;
 use crate::ffi::CStr;
 use crate::io;
