@@ -1,15 +1,16 @@
+// The structure is copied from unsupported.rs
 #![allow(unused_imports)]
 use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut};
 use crate::arch::asm;
 
-use syscall::*; //syscall from D3OS
+use syscall::*; // syscall from D3OS
 use alloc::string::{String, ToString};
 
 pub struct Stdin;
 pub struct Stdout;
 pub type Stderr = Stdout;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 impl Stdin {
     pub const fn new() -> Stdin {
@@ -74,7 +75,7 @@ impl io::Read for Stdin {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 impl Stdout {
     pub const fn new() -> Stdout {
@@ -84,9 +85,8 @@ impl Stdout {
 
 impl io::Write for Stdout {
     #[inline]
-    fn write(&mut self, buf: &[u8]) -> io::Result<usize> { //syscall used here
-        
-
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
+        // D3OS syscall:
         let res = syscall(
             SystemCall::TerminalWriteOutput,
             &[buf.as_ptr() as usize, buf.len()],
@@ -127,7 +127,7 @@ impl io::Write for Stdout {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 pub const STDIN_BUF_SIZE: usize = 128;
 

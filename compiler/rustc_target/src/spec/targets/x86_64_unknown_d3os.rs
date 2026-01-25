@@ -1,3 +1,4 @@
+// Based on https://wiki.osdev.org/Porting_Rust_standard_library
 use crate::spec::{base, PanicStrategy, Target, TargetMetadata};
 
 pub(crate) fn target() -> Target {
