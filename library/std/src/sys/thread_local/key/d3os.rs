@@ -72,34 +72,35 @@ pub unsafe fn destroy_tls() {
 
 // Set the TLS value for a key
 pub unsafe fn set(key: Key, val: *mut u8) {
-    let idx = key as usize;
+    /*let idx = key as usize;
     if idx >= MAX_KEYS {
         panic!("invalid TLS key");
-    }
+    }*/
 
     // Access to static mut = must be in unsafe block
     /*unsafe {
         VALUES[idx] = val;
     }*/
 
-    let mut thread = thread::current().unwrap();
-    thread.set_tls_value(idx, unsafe{*val});
+    //let mut thread = thread::current().unwrap();
+    thread::set_tls_value(key, val);
 }
 
 // Get the TLS value for a key
 pub unsafe fn get(key: Key) -> *mut u8 {
-    let idx = key as usize;
+    /*let idx = key as usize;
     if idx >= MAX_KEYS {
         panic!("invalid TLS key");
-    }
+    }*/
 
     //unsafe { VALUES[idx] }
 
-    let mut thread = thread::current().unwrap();
+    /*let mut thread = thread::current().unwrap();
     if let Some(val) = thread.get_tls_value(idx) {
         let boxed = Box::new(val); //allocate on heap
         let ptr: *mut u8 = Box::into_raw(boxed); //take ownership
         return ptr;
     }
-    core::ptr::null_mut() //else null
+    core::ptr::null_mut() //else null*/
+    thread::get_tls_value(key)
 }
