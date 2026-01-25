@@ -1,4 +1,4 @@
-//use crate::spec::crt_objects;
+// Based on https://wiki.osdev.org/Porting_Rust_standard_library
 use crate::spec::{Cc, LinkerFlavor, Lld, StackProbeType, TargetOptions, CodeModel};
 
 pub(crate) fn opts() -> TargetOptions {
@@ -8,11 +8,7 @@ pub(crate) fn opts() -> TargetOptions {
         linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
         stack_probes: StackProbeType::Inline,
         code_model: Some(CodeModel::Large),
-        //relocation_model: RelocModel::Static,
-        // Following two only if using external CRT to provide _start
-        //pre_link_objects: crt_objects::pre_d3os(),
-        //post_link_objects: crt_objects::post_d3os(),
-        has_thread_local: false, //<---!!!
+        has_thread_local: false,
         ..Default::default()
     }
 }

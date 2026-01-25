@@ -1,3 +1,4 @@
+// Code copied from "unsupported".
 use crate::io as std_io;
 
 // SAFETY: must be called only once during runtime initialization.

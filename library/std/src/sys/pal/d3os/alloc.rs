@@ -1,3 +1,4 @@
+// Copied from https://wiki.osdev.org/Porting_Rust_standard_library
 use crate::{
     alloc::{GlobalAlloc, Layout, System},
     ptr,

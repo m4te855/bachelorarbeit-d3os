@@ -1,3 +1,4 @@
+// Code copied from "unsupported".
 use crate::fmt;
 use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut};
 use crate::sys_common::{FromInner, IntoInner};

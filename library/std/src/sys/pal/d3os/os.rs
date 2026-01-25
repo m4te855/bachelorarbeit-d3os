@@ -1,3 +1,4 @@
+// Code copied from "unsupported".
 use super::unsupported;
 use crate::error::Error as StdError;
 use crate::ffi::{OsStr, OsString};
