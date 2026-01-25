@@ -84,9 +84,8 @@ impl Stdout {
 
 impl io::Write for Stdout {
     #[inline]
-    fn write(&mut self, _buf2: &[u8]) -> io::Result<usize> { //syscall used here
-        let s = "Grüße aus std::io!";
-        let buf: &[u8] = s.as_bytes();
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> { //syscall used here
+        
 
         let res = syscall(
             SystemCall::TerminalWriteOutput,
@@ -94,12 +93,12 @@ impl io::Write for Stdout {
         );
             
         match res {
-            Ok(_) => Ok(420),
+            Ok(_) => Ok(buf.len()),
             Err(_) => Err(io::Error::new(io::ErrorKind::Other, "write failed")),
         }
     }
 
-    #[inline]
+    /*#[inline]
     fn write_vectored(&mut self, bufs: &[IoSlice<'_>]) -> io::Result<usize> {
         let total_len = bufs.iter().map(|b| b.len()).sum();
         Ok(total_len)
@@ -120,7 +119,7 @@ impl io::Write for Stdout {
         Ok(())
     }
 
-    // Keep the default write_fmt so the `fmt::Arguments` are still evaluated.
+    // Keep the default write_fmt so the `fmt::Arguments` are still evaluated.*/
 
     #[inline]
     fn flush(&mut self) -> io::Result<()> {
