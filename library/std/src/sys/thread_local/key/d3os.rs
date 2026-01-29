@@ -48,16 +48,7 @@ pub unsafe fn destroy(key: Key) {
 
 // run destructors on thread exit (stub)
 pub unsafe fn destroy_tls() {
-    /*unsafe {
-        for i in 0..MAX_KEYS {
-            let val = VALUES[i];
-            if !val.is_null() {
-                if let Some(dtor) = DTORS[i] {
-                    dtor(val);
-                }
-            }
-        }
-    }*/
+    todo!();
 }
 
 //////////////////////////////////////////////////////////////////////
