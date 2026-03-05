@@ -85,9 +85,9 @@ r-efi-alloc = { version = "2.0.0", features = ['rustc-dep-of-std'] }
 
 # Dependencies on D3OS for the standard library; adjust paths as necessary
 [target.'cfg(target_os = "d3os")'.dependencies]
-runtime = {path= "/home/david-baranowski/ba-dabar113/D3OS/os/library/runtime", features = ["rustc-dep-of-std"] }
-concurrent = {path= "/home/david-baranowski/ba-dabar113/D3OS/os/library/concurrent", features = ["rustc-dep-of-std"] }
-syscall = {path= "/home/david-baranowski/ba-dabar113/D3OS/os/library/syscall", features = ["rustc-dep-of-std"] }
+runtime = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
+concurrent = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
+syscall = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
 
 [features]
 backtrace = [
