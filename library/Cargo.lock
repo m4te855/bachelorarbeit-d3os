@@ -67,6 +67,7 @@ dependencies = [
 [[package]]
 name = "concurrent"
 version = "0.1.0"
+source = "git+https://github.com/hhu-bsinfo/D3OS?branch=stdlib#e7e34eec84e9aa47cb32f179f831d5d457e6471a"
 dependencies = [
  "compiler_builtins",
  "rustc-std-workspace-alloc",
@@ -273,6 +274,7 @@ dependencies = [
 [[package]]
 name = "runtime"
 version = "0.1.0"
+source = "git+https://github.com/hhu-bsinfo/D3OS?branch=stdlib#e7e34eec84e9aa47cb32f179f831d5d457e6471a"
 dependencies = [
  "cfg-if",
  "compiler_builtins",
@@ -373,6 +375,7 @@ dependencies = [
 [[package]]
 name = "syscall"
 version = "0.1.0"
+source = "git+https://github.com/hhu-bsinfo/D3OS?branch=stdlib#e7e34eec84e9aa47cb32f179f831d5d457e6471a"
 dependencies = [
  "compiler_builtins",
  "rustc-std-workspace-alloc",
