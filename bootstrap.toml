@@ -9,6 +9,7 @@ change-id = 145131
 [build]
     host = ["x86_64-unknown-linux-gnu"]
     target = ["x86_64-unknown-linux-gnu", "x86_64-unknown-d3os"]
+    jobs = 4
 
 [rust]
     incremental = true
