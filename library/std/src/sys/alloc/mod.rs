@@ -107,4 +107,5 @@ cfg_select! {
     target_os = "zkvm" => {
         mod zkvm;
     }
+    target_os = "d3os" => {}
 }
