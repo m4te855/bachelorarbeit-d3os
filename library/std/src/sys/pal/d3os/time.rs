@@ -1,3 +1,4 @@
+//copied code from unsupported: library/std/src/sys/pal/unsupported/time.rs 
 use crate::time::Duration;
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Debug, Hash)]
@@ -27,6 +28,10 @@ impl Instant {
 }
 
 impl SystemTime {
+    pub const MAX: SystemTime = SystemTime(Duration::MAX);
+
+    pub const MIN: SystemTime = SystemTime(Duration::ZERO);
+
     pub fn now() -> SystemTime {
         panic!("time not implemented on this platform")
     }
