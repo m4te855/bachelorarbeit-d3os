@@ -10,6 +10,7 @@
 #![feature(allocator_api)]
 #![feature(alloc_layout_extra)]
 #![feature(fmt_internals)]
+#![feature(fmt_arguments_from_str)]
 #![feature(abi_x86_interrupt)]
 #![feature(map_try_insert)]
 #![feature(str_split_remainder)]
@@ -92,7 +93,7 @@ fn panic(info: &PanicInfo) -> ! {
         .level(Level::Error)
         .file(info.location().map(|l| l.file()))
         .line(info.location().map(|l| l.line()))
-        .args(Arguments::new_const(&args))
+        .args(Arguments::from_str(args[0]))
         .build();
 
     logger().log(&record);
