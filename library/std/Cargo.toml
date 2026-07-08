@@ -107,6 +107,7 @@ vex-sdk = { version = "0.27.0", features = [
 runtime = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
 concurrent = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
 syscall = { git = "https://github.com/hhu-bsinfo/D3OS", branch = "stdlib", features = ["rustc-dep-of-std"] }
+dlmalloc = { version = "0.2.10", features = ['rustc-dep-of-std'] }
 
 [features]
 backtrace = [
