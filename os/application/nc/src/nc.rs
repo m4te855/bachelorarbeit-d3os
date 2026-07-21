@@ -98,8 +98,7 @@ Examples:
     // loop: send and receive
     let mut buf = [0u8; 1024];
     loop {
-        let mut message = read();
-        message.push('\n');
+        let message = read();
         match socket {
             Socket::Udp(ref sock) => sock.send_to(message.as_bytes(), addr)
                 .expect("failed to send char"),
