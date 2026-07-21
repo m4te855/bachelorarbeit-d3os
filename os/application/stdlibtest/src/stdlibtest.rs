@@ -1,4 +1,4 @@
-use std::io::{self, Write};
+use std::io::{self, BufRead, Read, Write};
 
 // A type whose 4096-byte alignment far exceeds the 8 the old stub allocator allowed.
 #[repr(align(4096))]
@@ -13,6 +13,49 @@ pub fn main() {
     print!("This has been written using the print!-macro!\n");
     println!("And this has been written using {}!", "println!");
 
+    // ----- stdio (input) ------
+    // reading from stdin directly
+    let stdin = io::stdin();
+    let mut handle = stdin.lock();
+
+    println!("Type something and press Enter:");
+    let mut buffer = [0u8; 128];
+    match handle.read(&mut buffer) {
+        Ok(bytes_read) => {
+            let input = String::from_utf8_lossy(&buffer[..bytes_read]);
+            println!("Read {} bytes from stdin: {:?}", bytes_read, input);
+        }
+        Err(error) => println!("Reading from stdin failed: {:?}", error),
+    }
+    // reading a line using read_line
+    println!("Type something and press Enter (read_line test):");
+    let mut line = String::new();
+    match handle.read_line(&mut line) {
+        Ok(bytes_read) => println!("Read {} bytes with read_line: {:?}", bytes_read, line),
+        Err(error) => println!("Reading with read_line failed: {:?}", error),
+    }
+/* 
+    // interactive stdin test loop, press Enter on an empty line to quit
+    println!("Input test loop, empty line quits:");
+    let stdin = io::stdin();
+    let mut handle = stdin.lock();
+    let mut buffer = [0u8; 128];
+    loop {
+        match handle.read(&mut buffer) {
+            Ok(bytes_read) => {
+                let input = String::from_utf8_lossy(&buffer[..bytes_read]);
+                println!("Read {} bytes from stdin: {:?}", bytes_read, input);
+                if input == "\n" {
+                    break;
+                }
+            }
+            Err(error) => {
+                println!("Reading from stdin failed: {:?}", error);
+                break;
+            }
+        }
+    }
+*/
     // ------ heap ------
     // --- heap: large allocation (beyond the old 64 KiB stub buffer) ---
     let big: Vec<u8> = vec![0; 1024 * 1024];
