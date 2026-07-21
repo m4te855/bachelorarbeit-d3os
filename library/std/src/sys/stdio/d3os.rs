@@ -20,10 +20,17 @@ impl Stdin {
 
 impl io::Read for Stdin {
     #[inline]
-    fn read(&mut self, _buf: &mut [u8]) -> io::Result<usize> {
-        Ok(0)
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+        if buf.is_empty() { return Ok(0); }
+        // 0 == TerminalMode::Canonical (blocks until Enter, echoes)
+        let res = syscall(SystemCall::TerminalReadInput,
+            &[buf.as_mut_ptr() as usize, buf.len(), 0]);
+        match res {
+            Ok(n) => Ok(n),
+            Err(_) => Err(io::Error::new(io::ErrorKind::Other, "read failed")),
+        }
     }
-
+    /*
     #[inline]
     fn read_buf(&mut self, _cursor: BorrowedCursor<'_>) -> io::Result<()> {
         Ok(())
@@ -59,7 +66,7 @@ impl io::Read for Stdin {
     #[inline]
     fn read_to_string(&mut self, _buf: &mut String) -> io::Result<usize> {
         Ok(0)
-    }
+    }*/
 }
 
 //////////////////////////////////////////////////////////////////////
