@@ -31,7 +31,8 @@ impl Canonical {
     }
 
     fn submit(&mut self) -> Vec<u8> {
-        let buffer = self.buffer.clone();
+        let mut buffer = self.buffer.clone();
+        buffer.push('\n');
         self.cursor_pos = 0;
         self.buffer.clear();
         buffer.into()

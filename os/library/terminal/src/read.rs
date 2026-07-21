@@ -18,7 +18,7 @@ use crate::{DecodedKeyType, TerminalMode};
 /// The terminal will echo.
 /// The application will block until 'Enter' is pressed.
 /// Command line editing is enabled.
-/// Returns written line.
+/// Returns written line, including the trailing newline.
 ///
 /// Author: Sebastian Keller
 pub fn read() -> String {
