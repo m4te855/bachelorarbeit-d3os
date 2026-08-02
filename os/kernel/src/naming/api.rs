@@ -59,21 +59,37 @@ pub fn init() {
     //    test::running_tests();
 }
 
-/// Open/create a named object referenced by `path` using the given `flags`. \
-/// Returns `Ok(object_handle)` or `Err`.
+// open() create / create_new semantics adopted 1:1 from Tom Gehrmann's
+// D3OS naming implementation (create is non-exclusive; EEXIST only with EXCLUSIVE).
 pub fn open(path: &str, flags: OpenOptions) -> Result<usize, Errno> {
+    // Courtesy error instead of creating a file
+    if flags.contains(OpenOptions::DIRECTORY | OpenOptions::CREATE) {
+        return Err(Errno::EINVAL);
+    }
+
+    //let path = &resolve_canonical_path(path);
+    
     // avoid creating a file twice
-    if flags.contains(OpenOptions::CREATE) {
-        let result = lookup::lookup_named_object(path);
-        if result.is_ok() {
+    if flags.contains(OpenOptions::CREATE | OpenOptions::EXCLUSIVE) {
+        if lookup::lookup_named_object(path).is_ok() {
             return Err(Errno::EEXIST);
         }
     }
 
     // Try to open the object
     open_objects::open(path, flags).or_else(|e| {
-        if flags.contains(OpenOptions::CREATE) && e != Errno::EEXIST {
-            touch(path).and_then(|_| open_objects::open(path, flags))
+        if e == Errno::ENOENT && flags.contains(OpenOptions::CREATE) {
+            match touch(path) {
+                Ok(_) => open_objects::open(path, flags),
+                Err(Errno::EEXIST) => {
+                    if flags.contains(OpenOptions::EXCLUSIVE) {
+                        Err(Errno::EEXIST)
+                    } else {
+                        open_objects::open(path, flags)
+                    }
+                },
+                Err(e) => Err(e),
+            }
         } else {
             Err(e)
         }
