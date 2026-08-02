@@ -45,6 +45,10 @@ cfg_select! {
         mod vexos;
         use vexos as imp;
     }
+    target_os = "d3os" => {         
+        mod d3os;                     
+        use d3os as imp;             
+    }                               
     _ => {
         mod unsupported;
         use unsupported as imp;
