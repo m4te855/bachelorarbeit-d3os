@@ -14,10 +14,10 @@ bitflags! {
     pub struct OpenOptions: usize {
         const READONLY  = 1;
         const READWRITE = 2;
-        const CREATE    = 3;
-        const EXCLUSIVE = 4;
-        const DIRECTORY = 5;
-        const WRITEONLY = 6; // relevant for pipes
+        const CREATE    = 4;
+        const EXCLUSIVE = 8;
+        const DIRECTORY = 16;
+        const WRITEONLY = 32; // relevant for pipes
     }
 }
 
