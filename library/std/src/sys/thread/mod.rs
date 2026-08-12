@@ -1,4 +1,11 @@
 cfg_select! {
+    target_os = "d3os" => {
+        mod d3os;
+        pub use d3os::{Thread, current_os_id, sleep, yield_now, DEFAULT_MIN_STACK_SIZE};
+        #[expect(dead_code)]
+        mod unsupported;
+        pub use unsupported::{available_parallelism, set_name};
+    }
     target_os = "hermit" => {
         mod hermit;
         pub use hermit::{Thread, available_parallelism, sleep, yield_now, DEFAULT_MIN_STACK_SIZE};
