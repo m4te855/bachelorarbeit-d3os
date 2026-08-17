@@ -1,4 +1,5 @@
 // The structure is copied from unsupported.rs
+// Stdin::read and Stdout::write mirror the D3OS terminal crate.
 #![allow(unused_imports)]
 use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut};
 use crate::arch::asm;
@@ -10,8 +11,6 @@ pub struct Stdin;
 pub struct Stdout;
 pub type Stderr = Stdout;
 
-//////////////////////////////////////////////////////////////////////
-
 impl Stdin {
     pub const fn new() -> Stdin {
         Stdin
@@ -19,10 +18,12 @@ impl Stdin {
 }
 
 impl io::Read for Stdin {
+    // Implementing `read` is sufficient; all other `io::Read` methods use their defaults.
     #[inline]
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+        // Empty buffer returns Ok(0) per the Read contract; also avoids a length-0 syscall.
         if buf.is_empty() { return Ok(0); }
-        // 0 == TerminalMode::Canonical (blocks until Enter, echoes)
+        // Args: (buf_ptr, len, mode). Mode 0 = Canonical (line-buffered, blocking cooked mode).
         let res = syscall(SystemCall::TerminalReadInput,
             &[buf.as_mut_ptr() as usize, buf.len(), 0]);
         match res {
@@ -30,43 +31,6 @@ impl io::Read for Stdin {
             Err(_) => Err(io::Error::new(io::ErrorKind::Other, "read failed")),
         }
     }
-    /*
-    #[inline]
-    fn read_buf(&mut self, _cursor: BorrowedCursor<'_>) -> io::Result<()> {
-        Ok(())
-    }
-
-    #[inline]
-    fn read_vectored(&mut self, _bufs: &mut [IoSliceMut<'_>]) -> io::Result<usize> {
-        Ok(0)
-    }
-
-    #[inline]
-    fn is_read_vectored(&self) -> bool {
-        // Do not force `Chain<Empty, T>` or `Chain<T, Empty>` to use vectored
-        // reads, unless the other reader is vectored.
-        false
-    }
-
-    #[inline]
-    fn read_exact(&mut self, buf: &mut [u8]) -> io::Result<()> {
-        if !buf.is_empty() { Err(io::Error::READ_EXACT_EOF) } else { Ok(()) }
-    }
-
-    #[inline]
-    fn read_buf_exact(&mut self, cursor: BorrowedCursor<'_>) -> io::Result<()> {
-        if cursor.capacity() != 0 { Err(io::Error::READ_EXACT_EOF) } else { Ok(()) }
-    }
-
-    #[inline]
-    fn read_to_end(&mut self, _buf: &mut Vec<u8>) -> io::Result<usize> {
-        Ok(0)
-    }
-
-    #[inline]
-    fn read_to_string(&mut self, _buf: &mut String) -> io::Result<usize> {
-        Ok(0)
-    }*/
 }
 
 //////////////////////////////////////////////////////////////////////
