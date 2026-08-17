@@ -69,12 +69,12 @@ pub fn main() {
 
     // --- heap: many allocate/free cycles (proves dealloc reclaims) ---
     let mut sum: u64 = 0;
-    for i in 0..1000 {
+    for i in 0..10000 {
         let mut v: Vec<u8> = vec![0; 64 * 1024];
         v[i] = 1;              
         sum += v[i] as u64;     // prevent dead-allocation elimination
     }
-    println!("1000 x 64 KiB alloc/free cycles ok (dealloc reclaims, checksum {})", sum);
+    println!("10000 x 64 KiB alloc/free cycles ok (dealloc reclaims, checksum {})", sum);
 
     // --- heap: over-aligned allocation (old stub rejected align > 8) ---
     let a = Box::new(Aligned([1; 4096]));
@@ -146,7 +146,7 @@ pub fn main() {
                 Ok(position) => println!("seek Current(+3) -> {}", position),
                 Err(error) => println!("seek Current(+3) failed: {:?}", error),
             }
-            // negative offset is not expressible on d3os -> must be rejected, not crash
+            // negative offset is not expressible on D3OS -> must be rejected, not crash
             match file.seek(SeekFrom::Current(-1)) {
                 Ok(position) => println!("seek Current(-1): unexpected ok -> {}", position),
                 Err(error) => println!("seek Current(-1): correctly rejected ({:?})", error),
@@ -226,7 +226,7 @@ pub fn main() {
     thread::sleep(Duration::from_millis(10));
     println!("yield_now + sleep(10ms) ok");
 
-    // d3os delegates available_parallelism to unsupported, so this always returns
+    // D3OS delegates available_parallelism to unsupported, so this always returns
     // Err ("unknown"); the Ok arm stays as a defensive fallback
     match thread::available_parallelism() {
         Ok(count) => println!("available_parallelism = {}", count),
