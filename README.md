@@ -1,4 +1,4 @@
-# Bachelorarbeit — Portierung der Rust-Standardbibliothek auf D3OS
+# Bachelorarbeit — Erweiterung der Rust-Standardbibliothek fur das Betriebssystem D3OS
 
 Abgabe-Repository von Mate-Trpmir Jakulj, Institut für Informatik, Heinrich-Heine-Universität Düsseldorf.
 
