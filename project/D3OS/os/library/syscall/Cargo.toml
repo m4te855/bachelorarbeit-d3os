@@ -1,0 +1,27 @@
+[package]
+edition = "2024"
+name = "syscall"
+version = "0.1.0"
+authors = ["Michael Schöttner <michael.schoettner@hhu.de>, Fabian Ruhland <ruhland@hhu.de>"]
+
+[lib]
+test = false
+doctest = false
+bench = false
+
+[features]
+default = ["userspace"]
+userspace = []
+rustc-dep-of-std = [
+	"core",
+    "alloc",
+	"compiler_builtins",
+]
+
+[dependencies]
+# External depencies
+#num_enum = { version = "0.7", default-features = false }
+#bitflags = "1.0"
+core = { version = "1.0.0", optional = true, package = "rustc-std-workspace-core" }
+compiler_builtins = { version = "0.1", optional = true }
+alloc = { version = "1.0.0", optional = true, package = "rustc-std-workspace-alloc" }

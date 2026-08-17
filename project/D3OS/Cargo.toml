@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "os/kernel",
+    "os/application/about",
+    "os/application/hello",
+    "os/application/helloc",
+    "os/application/shell",
+    "os/application/legacy_shell",
+    "os/application/uptime",
+    "os/application/date",
+    "os/application/ls",
+    "os/application/heaptest",
+    #"os/application/threadtest",
+    "os/application/filetest",
+    "os/application/nc",
+    "os/application/ping",
+    "os/application/ip",
+    "os/application/peanut-gb",
+    "os/application/pipetest",
+    "os/application/stdfstest",
+    "os/application/stdheaptest",
+    "os/application/stdiotest",
+    "os/application/stdthreadtest",
+    "os/application/window_manager",
+    "os/application/terminal_emulator",
+    "os/application/keytest",
+]
+
+# [profile.release]
+# debug = true

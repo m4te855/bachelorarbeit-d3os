@@ -1,0 +1,12 @@
+[package]
+edition = "2024"
+name = "stdiotest"
+version = "0.1.0"
+authors = ["David Baranowski"]
+
+[lib]
+crate-type = ["staticlib"]
+path = "src/stdiotest.rs"
+test = false
+doctest = false
+bench = false
