@@ -1,0 +1,12 @@
+[package]
+edition = "2024"
+name = "stdthreadtest"
+version = "0.1.0"
+authors = ["Mate-Trpimir Jakulj"]
+
+[lib]
+crate-type = ["staticlib"]
+path = "src/stdthreadtest.rs"
+test = false
+doctest = false
+bench = false
