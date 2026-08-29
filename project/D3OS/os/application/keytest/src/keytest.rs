@@ -29,7 +29,7 @@ pub fn main() {
             println!("Enter a line (type 'exit' to exit)");
             loop {
                 print!("Echo: ");
-                match read().as_str() {
+                match read().trim_end_matches('\n') {
                     "exit" => return,
                     line => println!("Read: {}", line),
                 }
