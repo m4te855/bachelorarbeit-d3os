@@ -1,0 +1,49 @@
+[submodule "project/rust/src/doc/nomicon"]
+	path = project/rust/src/doc/nomicon
+	url = https://github.com/rust-lang/nomicon.git
+	shallow = true
+[submodule "project/rust/src/tools/cargo"]
+	path = project/rust/src/tools/cargo
+	url = https://github.com/rust-lang/cargo.git
+	shallow = true
+[submodule "project/rust/src/doc/reference"]
+	path = project/rust/src/doc/reference
+	url = https://github.com/rust-lang/reference.git
+	shallow = true
+[submodule "project/rust/src/doc/book"]
+	path = project/rust/src/doc/book
+	url = https://github.com/rust-lang/book.git
+	shallow = true
+[submodule "project/rust/src/doc/rust-by-example"]
+	path = project/rust/src/doc/rust-by-example
+	url = https://github.com/rust-lang/rust-by-example.git
+	shallow = true
+[submodule "project/rust/src/doc/edition-guide"]
+	path = project/rust/src/doc/edition-guide
+	url = https://github.com/rust-lang/edition-guide.git
+	shallow = true
+[submodule "project/rust/src/llvm-project"]
+	path = project/rust/src/llvm-project
+	url = https://github.com/rust-lang/llvm-project.git
+	branch = rustc/21.1-2025-08-01
+	shallow = true
+[submodule "project/rust/src/doc/embedded-book"]
+	path = project/rust/src/doc/embedded-book
+	url = https://github.com/rust-embedded/book.git
+	shallow = true
+[submodule "project/rust/library/backtrace"]
+	path = project/rust/library/backtrace
+	url = https://github.com/rust-lang/backtrace-rs.git
+	shallow = true
+[submodule "project/rust/src/tools/rustc-perf"]
+	path = project/rust/src/tools/rustc-perf
+	url = https://github.com/rust-lang/rustc-perf.git
+	shallow = true
+[submodule "project/rust/src/tools/enzyme"]
+	path = project/rust/src/tools/enzyme
+	url = https://github.com/rust-lang/enzyme.git
+	shallow = true
+[submodule "project/rust/src/gcc"]
+	path = project/rust/src/gcc
+	url = https://github.com/rust-lang/gcc.git
+	shallow = true
